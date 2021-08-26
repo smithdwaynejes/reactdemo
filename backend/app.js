@@ -1,4 +1,5 @@
 require("custom-env").env("staging")
+require('dotenv').config();
 var express = require("express")
 const { postgraphile } = require("postgraphile")
 var path = require("path")
@@ -16,7 +17,8 @@ var app = express()
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
-  credentials: true // <-- REQUIRED backend setting
+  credentials: true, // <-- REQUIRED backend setting,
+  optionsSuccessStatus: 200 ,
 }
 
 const store = new KnexSessionStore({
@@ -45,7 +47,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(
-  postgraphile(process.env.DATABASE_URL || "postgres:///agility-dev", {
+  postgraphile(process.env.DATABASE_URL || "postgres://agility:Test@1234@localhost:5432/sammy", {
     graphiql: true,
     appendPlugins: [PassportLoginPlugin],
     additionalGraphQLContextFromRequest: req => {

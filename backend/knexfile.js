@@ -1,7 +1,7 @@
 module.exports = {
     development: {
       client: 'pg',
-      connection: 'postgres://localhost/agility-dev'
+      connection: 'postgres://agility:Test@1234@localhost:5432/sammy'
     },
     test: {},
     production: {
